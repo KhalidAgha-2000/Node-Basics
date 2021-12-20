@@ -81,7 +81,7 @@ function quit(){
 }
 
 /**
- * 
+ * help to list all allowed command 
  * @return {void}
  */
 function help(){
