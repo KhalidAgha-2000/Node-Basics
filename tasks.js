@@ -37,6 +37,9 @@ function onDataReceived(text) {
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
+  else if (text === 'list\n') {
+    list();
+  }
   else if (text.startsWith("hello")) {
     text = text.trim();
     if (text.substring(0, 5) == "hello") {
@@ -51,7 +54,19 @@ function onDataReceived(text) {
     unknownCommand(text);
   }
 }
+/**
+ * 
+ * @param {string} c
+ * @returns {void} 
+ */
+function list() {
+  var myList = ['Study','cleeeeeeeeeeeepZZZZ','Get readyy'];
 
+  myList.forEach(element => {
+ console.log(myList.indexOf(element) + 1 + '- ' +element)
+
+  });
+}
 
 /**
  * prints "unknown command"
