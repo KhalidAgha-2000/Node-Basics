@@ -92,7 +92,7 @@ function quit() {
  * @return {void}
  */
 function help() {
-  console.log('list of command :\n quit OR exit \n hello')
+  console.log('list of command :\n quit OR exit \n hello\n You can add your name after type hello to greet you!')
 }
 
 
