@@ -72,7 +72,7 @@ function unknownCommand(c) {
  */
 function hello(name) {
   name.trim();
-  console.log('Hello ' + name + '!')
+  console.log('Hello' + name + '!')
 }
 
 
