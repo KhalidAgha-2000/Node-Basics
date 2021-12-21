@@ -8,8 +8,8 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-function startApp(name){
-  process.stdin.resume();
+function startApp(name) {
+  //process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`)
@@ -33,16 +33,21 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n'  || text=== 'exit\n') {
+
+  if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n' ){
-    hello();
+  else if (text.startsWith("hello")) {
+    text = text.trim();
+    if (text.substring(0, 5) == "hello") {
+      hello(text.substring(5));
+    }
+    else { unknownCommand(text) }
   }
-  else if (text==='help\n'){
+  else if (text === 'help\n') {
     help();
   }
-  else{
+  else {
     unknownCommand(text);
   }
 }
@@ -55,8 +60,8 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
-function unknownCommand(c){
-  console.log('unknown command: "'+c.trim()+'"')
+function unknownCommand(c) {
+  console.log('unknown command: "' + c.trim() + '"')
 }
 
 
@@ -65,9 +70,11 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(name) {
+  name.trim();
+  console.log('Hello ' + name + '!')
 }
+
 
 
 /**
@@ -75,7 +82,7 @@ function hello(){
  *
  * @returns {void}
  */
-function quit(){
+function quit() {
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -84,7 +91,7 @@ function quit(){
  * help to list all allowed command 
  * @return {void}
  */
-function help(){
+function help() {
   console.log('list of command :\n quit OR exit \n hello')
 }
 
