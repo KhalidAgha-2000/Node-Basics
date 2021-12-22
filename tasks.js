@@ -32,6 +32,8 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+
+var myToDo=['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
 function onDataReceived(text) {
 
   if (text === 'quit\n' || text === 'exit\n') {
@@ -50,21 +52,28 @@ function onDataReceived(text) {
   else if (text === 'help\n') {
     help();
   }
+  else if (text.startsWith("add")) {
+    text = text.trim();
+    if (text.substring(0, 3) == "add") {
+      add(text.substring(3))
+    }
+    else { unknownCommand(text) }
+  }
+
+
   else {
     unknownCommand(text);
+
   }
 }
 /**
  * 
- * @param {string} c
+ * @param {string} 
  * @returns {void} 
  */
 function list() {
-  var myList = ['Study','cleeeeeeeeeeeepZZZZ','Get readyy'];
-
-  myList.forEach(element => {
- console.log(myList.indexOf(element) + 1 + '- ' +element)
-
+  myToDo.forEach(element => {
+    console.log(myToDo.indexOf(element) + 1 + '- ' + element)
   });
 }
 
@@ -88,6 +97,39 @@ function unknownCommand(c) {
 function hello(name) {
   name.trim();
   console.log('Hello' + name + '!')
+}
+
+
+/**
+ * 
+ *ADD
+ * @returns {void}
+ */
+ function add(task) {
+  task.trim();
+  if(task!=""){
+    myToDo.push(task)
+    console.log("new Task added --> " + task)
+    console.log( "You should :\n ")
+    console.log(myToDo)
+  }
+  else(console.log(" Add your task"))
+//   myToDo = [];
+//   myToDo2 = []
+//   newToDo = myToDo.push(task)
+ 
+//   console.log("new task added -->" + task)
+//   console.log(myToDo)
+// //  console.log(myToDo2)
+
+//   myToDo.forEach(element => {
+//     myToDo2.push(element)
+//   });
+//   console.log(myToDo2)
+
+//   myToDo2.forEach(element => {
+//     console.log(myToDo2.indexOf(element) + 1 + '- ' + element)
+//   });
 }
 
 
