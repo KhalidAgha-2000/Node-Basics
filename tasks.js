@@ -158,7 +158,7 @@ function quit() {
  * @return {void}
  */
 function help() {
-  console.log('list of command :\n quit OR exit \n hello\n You can add your name after type hello to greet you!')
+  console.log('list of command :\n quit OR exit \n hello\n You can add your name after type hello to greet you!\n list : to show your list of ToDo \n add : add item \n add : with empty throw ERROR \n remove : remove --> will remove last item \n remove with number of item will remove the item ')
 }
 
 
