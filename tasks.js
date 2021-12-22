@@ -33,7 +33,7 @@ function startApp(name) {
  * @returns {void}
  */
 
-var myToDo=['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
+var myToDo = ['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
 function onDataReceived(text) {
 
   if (text === 'quit\n' || text === 'exit\n') {
@@ -58,6 +58,15 @@ function onDataReceived(text) {
       add(text.substring(3))
     }
     else { unknownCommand(text) }
+  }
+  else if (text.trim().split(" ")[0] === "remove") {
+    remove(text.trim().substring(6)); 
+  // (text.startsWith("remove")) {
+  //   text = text.trim();
+  //   if (text.substring(0, 6) == "remove") {
+  //     remove(text.substring(6))
+  //   }
+  //   else { unknownCommand(text) }
   }
 
 
@@ -98,38 +107,80 @@ function hello(name) {
   name.trim();
   console.log('Hello' + name + '!')
 }
+/***
+ * REMOVE
+ */
+function remove(task) {
+  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
+    myToDo.splice(task - 1, 1);
+  console.log(myToDo)
+    return;
+  }
+  if (task.length == 0) {
+    myToDo.pop();
+     console.log(myToDo)
+     return;
+  }
+  console.log("The number you entered doesn't exist");
+  console.log(myToDo)
+}
+  // task.trim();
+  // var index = myToDo.indexOf();
+  // if (Number(index) >= 1 && Number(index) < myToDo.length) {
+  //   myToDo.splice((index - 1), 1)
+  //   console.log(myToDo.length)
+  // }else if (task == "") {
+  //   myToDo.pop();
+  //   console.log("You removed the last item on your TODO!")
+  //   console.log(myToDo)
+  // }
+  // if(task ==index) {
+  //   function removeE(arr, value){
+  //     return arr.filter(function(G){
+  //       return G!=value
+  //     })
+  //   }
+  //   var resultA=removeE(arr,index)
+  //   console.log(resultA)
+  //   // myToDo.splice(index, 1 )
+  //   // console.log(myToDo)
+  // }
+  // else if (task == "") {
+  //   myToDo.pop();
+  //   console.log("You removed the last item on your TODO!")
+  //   console.log(myToDo)
+  // }
 
-
+/***
+ * // Declare and initialize an array
+    var array = ["lowdash", "remove", "delete", "reset"]
+     
+    // Using filter method to create a remove method
+    function arrayRemove(arr, value) {
+     
+       return arr.filter(function(geeks){
+           return geeks != value;
+       });
+     
+    }
+     
+    var result = arrayRemove(array, "delete");
+    document.write("Remaining elements: " + result)
+ */
 /**
  * 
  *ADD
  * @returns {void}
  */
- function add(task) {
+function add(task) {
   task.trim();
-  if(task!=""){
+  if (task != "") {
     myToDo.push(task)
     console.log("new Task added --> " + task)
-    console.log( "You should :\n ")
+    console.log("You should :\n ")
     console.log(myToDo)
   }
-  else(console.log(" Add your task"))
-//   myToDo = [];
-//   myToDo2 = []
-//   newToDo = myToDo.push(task)
- 
-//   console.log("new task added -->" + task)
-//   console.log(myToDo)
-// //  console.log(myToDo2)
-
-//   myToDo.forEach(element => {
-//     myToDo2.push(element)
-//   });
-//   console.log(myToDo2)
-
-//   myToDo2.forEach(element => {
-//     console.log(myToDo2.indexOf(element) + 1 + '- ' + element)
-//   });
+  else (console.log(" Add your task"))
 }
 
 
