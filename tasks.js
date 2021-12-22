@@ -61,12 +61,6 @@ function onDataReceived(text) {
   }
   else if (text.trim().split(" ")[0] === "remove") {
     remove(text.trim().substring(6)); 
-  // (text.startsWith("remove")) {
-  //   text = text.trim();
-  //   if (text.substring(0, 6) == "remove") {
-  //     remove(text.substring(6))
-  //   }
-  //   else { unknownCommand(text) }
   }
 
 
