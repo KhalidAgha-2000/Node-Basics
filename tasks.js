@@ -124,49 +124,7 @@ function remove(task) {
   console.log("The number you entered doesn't exist");
   console.log(myToDo)
 }
-  // task.trim();
-  // var index = myToDo.indexOf();
-  // if (Number(index) >= 1 && Number(index) < myToDo.length) {
-  //   myToDo.splice((index - 1), 1)
-  //   console.log(myToDo.length)
-  // }else if (task == "") {
-  //   myToDo.pop();
-  //   console.log("You removed the last item on your TODO!")
-  //   console.log(myToDo)
-  // }
-  // if(task ==index) {
-  //   function removeE(arr, value){
-  //     return arr.filter(function(G){
-  //       return G!=value
-  //     })
-  //   }
-  //   var resultA=removeE(arr,index)
-  //   console.log(resultA)
-  //   // myToDo.splice(index, 1 )
-  //   // console.log(myToDo)
-  // }
-  // else if (task == "") {
-  //   myToDo.pop();
-  //   console.log("You removed the last item on your TODO!")
-  //   console.log(myToDo)
-  // }
 
-/***
- * // Declare and initialize an array
-    var array = ["lowdash", "remove", "delete", "reset"]
-     
-    // Using filter method to create a remove method
-    function arrayRemove(arr, value) {
-     
-       return arr.filter(function(geeks){
-           return geeks != value;
-       });
-     
-    }
-     
-    var result = arrayRemove(array, "delete");
-    document.write("Remaining elements: " + result)
- */
 /**
  * 
  *ADD
