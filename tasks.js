@@ -27,21 +27,48 @@ let database = [
   }
 
 ]
-try{
-let data = JSON.stringify(database);
-fs.writeFileSync('database.json', data);
+
+
+if (process.argv[2] === "blah.json") {
+  console.log(process.argv[2])
+
+  try {
+
+    let dataJ = fs.readFileSync('blah.json');
+    let taskJ = JSON.parse(dataJ);
+    console.log("blah josn file  ");
+    console.log(taskJ);
+  }
+  catch {
+    console.log("ERROR Reading")
+  }
+  try {
+    let data = JSON.stringify(database);
+    fs.writeFileSync('blah.json', data);
+  }
+  catch {
+    console.log("ERROR Writing")
+  }
+
 }
-catch{
+try {
+  let data = JSON.stringify(database);
+  fs.writeFileSync('database.json', data);
+}
+catch {
   console.log("ERROR")
 }
 
-try{
+try {
 
-let dataJ = fs.readFileSync('database.json');
-let taskJ = JSON.parse(dataJ);
-console.log(taskJ);
+  let dataJ = fs.readFileSync('database.json');
+  let taskJ = JSON.parse(dataJ);
+  console.log("database file ");
+  console.log(taskJ);
+
+  console.log(taskJ);
 }
-catch{
+catch {
   console.log("ERROR")
 }
 /**
