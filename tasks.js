@@ -60,9 +60,11 @@ function onDataReceived(text) {
     else { unknownCommand(text) }
   }
   else if (text.trim().split(" ")[0] === "remove") {
-    remove(text.trim().substring(6)); 
+    remove(text.trim().substring(6));
   }
-
+  else if (text.trim().split(" ")[0] === "edit") {
+    edit(text.trim().substring(4));
+  }
 
   else {
     unknownCommand(text);
@@ -102,20 +104,44 @@ function hello(name) {
   console.log('Hello' + name + '!')
 }
 /***
+ * Edit
+ */
+function edit(task) {
+  // task.trim();
+  if (task.length == 0) {
+    console.log("specify task to edit it ")
+  }
+  if (task == " new text") {
+    myToDo[myToDo.length - 1] = "new text"
+    console.log(myToDo)
+  }
+
+  if (task == "new text", Number(task) >= 1 && Number(task) <= myToDo.length) {
+    myToDo.splice(task - 1, 1, "new text")
+    console.log(myToDo)
+    return;
+  }
+
+
+
+
+}
+/***
+ *
  * REMOVE
  */
 function remove(task) {
   if (Number(task) >= 1 && Number(task) <= myToDo.length) {
     myToDo.splice(task - 1, 1);
-  console.log(myToDo)
+    console.log(myToDo)
     return;
   }
   if (task.length == 0) {
     myToDo.pop();
-     console.log(myToDo)
-     return;
+    console.log(myToDo)
+    return;
   }
-  console.log("The number you entered doesn't exist");
+  console.log("No index has this number");
   console.log(myToDo)
 }
 
