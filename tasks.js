@@ -32,6 +32,19 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+/**the object is for check & uncheck function  */
+var myToDoOb = [
+  { done: false, task: "Math" },
+  { done: false, task: "Sicence" },
+  { done: false, task: "E" },
+  { done: false, task: "F" },
+  { done: false, task: "Football" },
+  { done: false, task: "SleeepZZZ" },
+  { done: false, task: "Dog Out" },
+  { done: false, task: "Get Readyyyyyyyyy" },
+
+]
+/**array is for add \ edit \ remove \ update ... */
 var myToDo = ['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
 function onDataReceived(text) {
 
@@ -40,6 +53,7 @@ function onDataReceived(text) {
   }
   else if (text === 'list\n') {
     list();
+    listO()
   }
   else if (text.startsWith("hello")) {
     text = text.trim();
@@ -67,6 +81,9 @@ function onDataReceived(text) {
   else if (text.trim().split(" ")[0] === "check") {
     check(text.trim().substring(5));
   }
+  else if (text.trim().split(" ")[0] === "uncheck") {
+    uncheck(text.trim().substring(7));
+  }
   else {
     unknownCommand(text);
 
@@ -83,6 +100,12 @@ function list() {
     console.log(myToDo.indexOf(element) + 1 + '- ' + element)
   });
 }
+
+function listO() {
+  if(myToDoOb)
+console.log(myToDoOb)
+
+ }
 /**
  * prints "unknown command"
  * This function is supposed to run when all other commands have failed
@@ -144,33 +167,49 @@ function remove(task) {
 }
 
 /***
- * Done
+ *Check
  */
 function check(task) {
-  task.trim()
-  if (task.length == 0) {
-    console.log("Choose a task to check it!")
-    return
+  if (task.length==0) {
+    console.log("Enter the number of task!")
   }
-  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
-    var valuee=myToDo[task-1];
-    myToDo.splice(task - 1, 1,  `[✓] ${(valuee)} `)
-
-    console.log(myToDo)
-    return;
+  else {
+    taskNumber = task.split(" ");
+    //negative number
+    if (taskNumber[1] < 1 || taskNumber[1] > myToDoOb.length) {
+      console.log("This number is not exsist");
+    }
+    else {
+      for (i = 0; i < myToDoOb.length; i++) {
+        if (i == taskNumber[1] - 1) {
+          myToDoOb[i].done = true;
+          console.log(`[✓] ${myToDoOb[i].task} `)
+        }
+      }
+    }
   }
-  console.log("No index has this number");
-  console.log(myToDo)
 }
 
-/**
- * 
- * myToDo.forEach(element => {
-    // console.log(`[ ✓ ] ${myToDo.indexOf(element) + 1}- ${element}`)
-    console.log(myToDo.indexOf(element) + 1 + '- ' + element)
-  });} task 
- */
-
+function uncheck(task) {
+  if (task.length==0) {
+    console.log("Enter the number of task!")
+  }
+  else {
+    taskNumber = task.split(" ");
+    //negative number
+    if (taskNumber[1] < 1 || taskNumber[1] > myToDoOb.length) {
+      console.log("This number is not exsist");
+    }
+    else {
+      for (i = 0; i < myToDoOb.length; i++) {
+        if (i == taskNumber[1] - 1) {
+          myToDoOb[i].done =false;
+          console.log(`[X] ${myToDoOb[i].task} `)
+        }
+      }
+    }
+  }
+}
 /**
  * 
  *ADD
