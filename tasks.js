@@ -1,3 +1,49 @@
+const fs = require('fs');
+
+let database = [
+  {
+    "task": "milk",
+    "state": false
+  },
+  {
+    "task": "study",
+    "state": false
+  },
+  {
+    "task": "sleeeepZZz",
+    "state": false
+  },
+  {
+    "task": "jump",
+    "state": false
+  },
+  {
+    "task": "wooooooow",
+    "state": false
+  },
+  {
+    "task": "Dog",
+    "state": false
+  }
+
+]
+try{
+let data = JSON.stringify(database);
+fs.writeFileSync('database.json', data);
+}
+catch{
+  console.log("ERROR")
+}
+
+try{
+
+let dataJ = fs.readFileSync('database.json');
+let taskJ = JSON.parse(dataJ);
+console.log(taskJ);
+}
+catch{
+  console.log("ERROR")
+}
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -51,6 +97,9 @@ function onDataReceived(text) {
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
+  // else if (text === 'data\n') {
+  //   data()
+  // }
   else if (text === 'list\n') {
     list();
     listO()
@@ -102,10 +151,10 @@ function list() {
 }
 
 function listO() {
-  if(myToDoOb)
-console.log(myToDoOb)
+  if (myToDoOb)
+    console.log(myToDoOb)
 
- }
+}
 /**
  * prints "unknown command"
  * This function is supposed to run when all other commands have failed
@@ -170,7 +219,7 @@ function remove(task) {
  *Check
  */
 function check(task) {
-  if (task.length==0) {
+  if (task.length == 0) {
     console.log("Enter the number of task!")
   }
   else {
@@ -191,7 +240,7 @@ function check(task) {
 }
 
 function uncheck(task) {
-  if (task.length==0) {
+  if (task.length == 0) {
     console.log("Enter the number of task!")
   }
   else {
@@ -203,7 +252,7 @@ function uncheck(task) {
     else {
       for (i = 0; i < myToDoOb.length; i++) {
         if (i == taskNumber[1] - 1) {
-          myToDoOb[i].done =false;
+          myToDoOb[i].done = false;
           console.log(`[X] ${myToDoOb[i].task} `)
         }
       }
@@ -243,7 +292,7 @@ function quit() {
  * @return {void}
  */
 function help() {
-  
+
   console.log('--list of command :\n - quit OR exit \n - hello\n You can add your name after type hello to greet you!\n - list : to show your list of ToDo and for object (check/uncheck) \n - add : add item \n add : with empty throw ERROR \n - remove : remove --> will remove last item \n remove with number of item will remove the item \n remove with non existing number will throw an error \n - check : \n with number of task will mark it as done \n - uncheck : \n with number will mark the task as not done  ')
 }
 
