@@ -243,7 +243,8 @@ function quit() {
  * @return {void}
  */
 function help() {
-  console.log('list of command :\n quit OR exit \n hello\n You can add your name after type hello to greet you!\n list : to show your list of ToDo \n add : add item \n add : with empty throw ERROR \n remove : remove --> will remove last item \n remove with number of item will remove the item \n remove with non existing number will throw an error')
+  
+  console.log('--list of command :\n - quit OR exit \n - hello\n You can add your name after type hello to greet you!\n - list : to show your list of ToDo and for object (check/uncheck) \n - add : add item \n add : with empty throw ERROR \n - remove : remove --> will remove last item \n remove with number of item will remove the item \n remove with non existing number will throw an error \n - check : \n with number of task will mark it as done \n - uncheck : \n with number will mark the task as not done  ')
 }
 
 
