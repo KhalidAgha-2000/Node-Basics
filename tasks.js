@@ -32,7 +32,6 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-
 var myToDo = ['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
 function onDataReceived(text) {
 
@@ -65,7 +64,9 @@ function onDataReceived(text) {
   else if (text.trim().split(" ")[0] === "edit") {
     edit(text.trim().substring(4));
   }
-
+  else if (text.trim().split(" ")[0] === "check") {
+    check(text.trim().substring(5));
+  }
   else {
     unknownCommand(text);
 
@@ -78,10 +79,10 @@ function onDataReceived(text) {
  */
 function list() {
   myToDo.forEach(element => {
+    // console.log(`[ ✓ ] ${myToDo.indexOf(element) + 1}- ${element}`)
     console.log(myToDo.indexOf(element) + 1 + '- ' + element)
   });
 }
-
 /**
  * prints "unknown command"
  * This function is supposed to run when all other commands have failed
@@ -103,6 +104,7 @@ function hello(name) {
   name.trim();
   console.log('Hello' + name + '!')
 }
+
 /***
  * Edit
  */
@@ -116,15 +118,11 @@ function edit(task) {
     console.log(myToDo)
   }
 
-  if (task == "new text", Number(task) >= 1 && Number(task) <= myToDo.length) {
+  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
     myToDo.splice(task - 1, 1, "new text")
     console.log(myToDo)
     return;
   }
-
-
-
-
 }
 /***
  *
@@ -144,6 +142,34 @@ function remove(task) {
   console.log("No index has this number");
   console.log(myToDo)
 }
+
+/***
+ * Done
+ */
+function check(task) {
+  task.trim()
+  if (task.length == 0) {
+    console.log("Choose a task to check it!")
+    return
+  }
+  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
+    var valuee=myToDo[task-1];
+    myToDo.splice(task - 1, 1,  `[✓] ${(valuee)} `)
+
+    console.log(myToDo)
+    return;
+  }
+  console.log("No index has this number");
+  console.log(myToDo)
+}
+
+/**
+ * 
+ * myToDo.forEach(element => {
+    // console.log(`[ ✓ ] ${myToDo.indexOf(element) + 1}- ${element}`)
+    console.log(myToDo.indexOf(element) + 1 + '- ' + element)
+  });} task 
+ */
 
 /**
  * 
