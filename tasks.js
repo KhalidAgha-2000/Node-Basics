@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+
 let database = [
   {
     "task": "milk",
@@ -42,6 +43,9 @@ if (process.argv[2] === "blah.json") {
   catch {
     console.log("ERROR Reading")
   }
+
+}
+else {
   try {
     let data = JSON.stringify(database);
     fs.writeFileSync('blah.json', data);
@@ -117,18 +121,26 @@ var myToDoOb = [
   { done: false, task: "Get Readyyyyyyyyy" },
 
 ]
-/**array is for add \ edit \ remove \ update ... */
-var myToDo = ['Study', 'cleeeeeeeeeeeepZZZZ', 'Get readyy']
+
+var helpobj = [
+  { commandName: "help", commandAction: "display list of commands", additional: "no additional actions" },
+  { commandName: "quit or exit", commandAction: "close the app", additional: "no additional actions" },
+  { commandName: "hello", commandAction: "greet no one", additional: "hello with your name will greet you!" },
+  { commandName: "list", commandAction: "show your ToDo list ", additional: "no additional actions" },
+  { commandName: "check", commandAction: "mark your task with  ✓ ", additional: "you should add the number of existing task!" },
+  { commandName: "uncheck", commandAction: "mark your task with  X ", additional: "you should add the number of existing task!" },
+  { commandName: "remove", commandAction: "remove the task", additional: "remove the last task / speceify the number of task that you want to remove it" },
+  { commandName: "quit or exit", commandAction: "close the app", additional: "no additional actions" },
+]
+
+
 function onDataReceived(text) {
 
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  // else if (text === 'data\n') {
-  //   data()
-  // }
   else if (text === 'list\n') {
-    list();
+   
     listO()
   }
   else if (text.startsWith("hello")) {
@@ -170,16 +182,21 @@ function onDataReceived(text) {
  * @param {string} 
  * @returns {void} 
  */
-function list() {
-  myToDo.forEach(element => {
-    // console.log(`[ ✓ ] ${myToDo.indexOf(element) + 1}- ${element}`)
-    console.log(myToDo.indexOf(element) + 1 + '- ' + element)
-  });
-}
+// function list() {
+//   myToDo.forEach(element => {
+//     console.log(myToDo.indexOf(element) + 1 + '- ' + element)
+//   });
+// }
 
 function listO() {
-  if (myToDoOb)
-    console.log(myToDoOb)
+  myToDoOb.forEach(element => {
+    if (element.done == true) {
+      console.log(`[✓] ${myToDoOb.indexOf(element) + 1} - ${element.task}`)
+    }
+    if (element.done == false) {
+      console.log(`[X] ${myToDoOb.indexOf(element) + 1} - ${element.task}`)
+    }
+  });
 
 }
 /**
@@ -208,19 +225,22 @@ function hello(name) {
  * Edit
  */
 function edit(task) {
-  // task.trim();
-  if (task.length == 0) {
-    console.log("specify task to edit it ")
-  }
-  if (task == " new text") {
-    myToDo[myToDo.length - 1] = "new text"
-    console.log(myToDo)
+  if (task.length == 0 || Number(task) >= myToDoOb.length) {
+    console.log("specify task to edit it / Or enter number is exsist")
   }
 
-  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
-    myToDo.splice(task - 1, 1, "new text")
-    console.log(myToDo)
-    return;
+  if (task == " new text") {
+    myToDoOb[myToDoOb.length - 1] = ({ done: false, task: "new text" })
+    return listO()
+  }
+
+  if (Number(task) >= 1 && Number(task) <= myToDoOb.length) {
+    myToDoOb.splice(task - 1, 1, ({ done: false, task: "new text" }))
+    return listO()
+
+  }
+  else {
+    return listO();
   }
 }
 /***
@@ -228,18 +248,19 @@ function edit(task) {
  * REMOVE
  */
 function remove(task) {
-  if (Number(task) >= 1 && Number(task) <= myToDo.length) {
-    myToDo.splice(task - 1, 1);
-    console.log(myToDo)
-    return;
+  if (Number(task) >= 1 && Number(task) <= myToDoOb.length) {
+    myToDoOb.splice(task - 1, 1);
+    return listO();
   }
   if (task.length == 0) {
-    myToDo.pop();
-    console.log(myToDo)
-    return;
+    myToDoOb.pop();
+
+    return listO();
   }
-  console.log("No index has this number");
-  console.log(myToDo)
+  if (Number(task) > myToDoOb.length) {
+    console.log("Enter an exsist number!")
+    return listO()
+  }
 }
 
 /***
@@ -248,18 +269,19 @@ function remove(task) {
 function check(task) {
   if (task.length == 0) {
     console.log("Enter the number of task!")
+    return listO()
   }
   else {
     taskNumber = task.split(" ");
-    //negative number
     if (taskNumber[1] < 1 || taskNumber[1] > myToDoOb.length) {
-      console.log("This number is not exsist");
+      console.log("Enter an exsist number!");
+      return listO()
     }
     else {
       for (i = 0; i < myToDoOb.length; i++) {
         if (i == taskNumber[1] - 1) {
           myToDoOb[i].done = true;
-          console.log(`[✓] ${myToDoOb[i].task} `)
+          return listO()
         }
       }
     }
@@ -269,18 +291,19 @@ function check(task) {
 function uncheck(task) {
   if (task.length == 0) {
     console.log("Enter the number of task!")
+    return listO()
   }
   else {
     taskNumber = task.split(" ");
-    //negative number
     if (taskNumber[1] < 1 || taskNumber[1] > myToDoOb.length) {
-      console.log("This number is not exsist");
+      console.log("Enter an exsist number!");
+      return listO()
     }
     else {
       for (i = 0; i < myToDoOb.length; i++) {
         if (i == taskNumber[1] - 1) {
           myToDoOb[i].done = false;
-          console.log(`[X] ${myToDoOb[i].task} `)
+          return listO()
         }
       }
     }
@@ -292,17 +315,13 @@ function uncheck(task) {
  * @returns {void}
  */
 function add(task) {
-  task.trim();
   if (task != "") {
-    myToDo.push(task)
-    console.log("new Task added --> " + task)
-    console.log("You should :\n ")
-    console.log(myToDo)
+    myToDoOb.push({ done: false, task: task })
+    console.log("new task Added ---> " + task)
+    return listO()
   }
   else (console.log(" Add your task"))
 }
-
-
 
 /**
  * Exits the application
@@ -319,8 +338,11 @@ function quit() {
  * @return {void}
  */
 function help() {
+  console.log("This is your commands")
+  helpobj.forEach(element => {
+    console.log(`-- ${element.commandName} --> ${element.commandAction} \n ${element.additional}`)
+  });
 
-  console.log('--list of command :\n - quit OR exit \n - hello\n You can add your name after type hello to greet you!\n - list : to show your list of ToDo and for object (check/uncheck) \n - add : add item \n add : with empty throw ERROR \n - remove : remove --> will remove last item \n remove with number of item will remove the item \n remove with non existing number will throw an error \n - check : \n with number of task will mark it as done \n - uncheck : \n with number will mark the task as not done  ')
 }
 
 
